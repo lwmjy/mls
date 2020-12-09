@@ -2,7 +2,7 @@
   <swiper>
     <swiper-item v-for="item in banners">
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt="" @load="homeswiperload">
       </a>
     </swiper-item>
   </swiper>
@@ -21,9 +21,22 @@
           }
         }
       },
+      data(){
+        return {
+          swp: false
+        }
+      },
       components: {
         Swiper,
         SwiperItem
+      },
+      methods: {
+          homeswiperload(){
+            if (!this.swp){
+              this.$emit('homeswiperload')
+              this.swp = true
+            }
+          }
       }
     }
 </script>
